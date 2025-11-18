@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Princess! 👑</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts Background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: floatHeart 8s ease-in infinite;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Page Sections */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .page.hidden {
+            display: none;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Landing Page */
+        #landingPage .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 5px 20px rgba(255, 105, 180, 0.5);
+            margin-bottom: 30px;
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .glass-card h2 {
+            font-size: 2.5rem;
+            color: #ff1493;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .glass-card p {
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .btn-love {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            transition: all 0.4s ease;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 20px;
+        }
+
+        .btn-love:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+        }
+
+        .btn-love:active {
+            transform: scale(0.98);
+        }
+
+        .credit {
+            margin-top: 30px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .credit a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Letter Page */
+        .envelope-wrapper {
+            position: relative;
+            width: 450px;
+            height: 300px;
+            margin: 50px auto;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 225px solid transparent;
+            border-right: 225px solid transparent;
+            border-top: 150px solid rgba(255, 192, 203, 0.4);
+            backdrop-filter: blur(15px);
+            top: 0;
+            left: 0;
+            transform-origin: top center;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+
+        .heart-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6rem;
+            filter: drop-shadow(0 5px 15px rgba(255, 105, 180, 0.6));
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        .tap-instruction {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .envelope-wrapper.open .tap-instruction {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Letter Modal Overlay */
+        .letter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .letter-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .letter {
+            position: fixed;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.8);
+            border: 3px solid #ff6b9d;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Custom scrollbar for letter */
+        .letter::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .letter::-webkit-scrollbar-track {
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 10px;
+        }
+
+        .letter::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            border-radius: 10px;
+        }
+
+        .letter::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff5a8c 0%, #b05b73 100%);
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .close-letter {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: bold;
+        }
+
+        .close-letter:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
+        }
+
+        .letter h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #d91b5c;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .letter p {
+            color: #333;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            text-align: right;
+            color: #d91b5c;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 0 5px 20px rgba(255, 105, 180, 0.5);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        /* Music Player */
+        .music-player {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .song-item {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .song-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 40px rgba(255, 105, 180, 0.5);
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-info h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .song-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .song-item:hover .play-btn {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        /* Mystery Cards */
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            flex-wrap: nowrap;
+        }
+
+        .mystery-card {
+            height: 400px;
+            perspective: 1000px;
+            flex: 0 1 300px;
+            min-width: 280px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .mystery-card.revealed .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .card-front {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+        }
+
+        .card-front:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .card-front h3 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .card-front .icon {
+            font-size: 7rem;
+            margin-bottom: 20px;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            transform: rotateY(180deg);
+            box-shadow: 0 8px 32px 0 rgba(255, 105, 180, 0.5);
+        }
+
+        .card-back h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .progress-indicator {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .progress-indicator h4 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        /* Final Message */
+        .final-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(25px);
+            border-radius: 40px;
+            padding: 60px 50px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+
+        .final-card h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff1493;
+            margin-bottom: 30px;
+        }
+
+        .final-card p {
+            color: white;
+            font-size: 1.3rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .final-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff1493;
+            margin-top: 40px;
+        }
+
+        /* Sealed Ending */
+        .seal-container {
+            text-align: center;
+        }
+
+        .seal-animation {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .wax-seal {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
+            animation: sealPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes sealPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 50px rgba(255, 105, 180, 0.8);
+            }
+        }
+
+        .seal-text {
+            color: white;
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .seal-text p {
+            margin-bottom: 15px;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Letter page nav buttons positioned at bottom */
+        #letterNavButtons {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            z-index: 1001;
+            margin-top: 0;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        #letterNavButtons.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.5);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            top: -10px;
+            opacity: 0;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #landingPage .title {
+                font-size: 3.5rem;
+            }
+
+            .glass-card {
+                padding: 40px 30px;
+            }
+
+            .glass-card h2 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .envelope-wrapper {
+                width: 90%;
+                height: 250px;
+            }
+
+            .cards-container {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 20px 10px;
+            }
+
+            .mystery-card {
+                flex: 0 0 280px;
+            }
+
+            .final-card {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 1100px) and (min-width: 769px) {
+            .mystery-card {
+                flex: 0 1 280px;
+            }
+            
+            .cards-container {
+                gap: 30px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Confetti Container -->
+    <div class="confetti" id="confetti"></div>
+
+    <!-- Letter Overlay Backdrop -->
+    <div class="letter-overlay" id="letterOverlay" onclick="closeLetter()"></div>
+
+    <!-- Landing Page -->
+    <div class="page active" id="landingPage">
+        <h1 class="title">Hey Princess! 👑</h1>
+        <div class="glass-card">
+            <h2>A Note For You!</h2>
+            <p>I wanted to do something special for you, for this princess day, so I made something special just for you...</p>
+            <p>Click below to see what it is!</p>
+            <button class="btn-love" onclick="nextPage('letterPage')">Made with love only for you 💖</button>
+            <div class="credit">
+                Made by Yash Chavan
+            </div>
+        </div>
+    </div>
+
+    <!-- Love Letter Page -->
+    <div class="page" id="letterPage" style="padding-top: 60px; overflow-y: auto;">
+        <h2 class="section-title">A Love Letter 💌</h2>
+        <p class="section-subtitle">From my heart to yours</p>
+        
+        <div class="envelope-wrapper" id="envelope" onclick="openLetter()" style="margin-top: 50px; margin-bottom: 100px;">
+            <div class="envelope">
+                <div class="envelope-body"></div>
+                <div class="envelope-flap"></div>
+                <div class="heart-seal">💖</div>
+                <div class="tap-instruction">Tap me! 👆</div>
+                <div class="letter">
+                    <button class="close-letter" onclick="closeLetter(); event.stopPropagation();">×</button>
+                    <h3>My Dearest,</h3>
+                    <p>This is just the start...</p>
+                    <p>Get ready for what's next!</p>
+                    <p style="text-align: center; font-size: 2rem;">💖</p>
+                    <p class="letter-signature">With all my love</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons" id="letterNavButtons" style="opacity: 0; pointer-events: none; transition: opacity 0.8s ease;">
+            <button class="btn-nav" onclick="nextPage('musicPage')">Continue to Playlist 🎵</button>
+        </div>
+    </div>
+
+    <!-- Music Playlist Page -->
+    <div class="page" id="musicPage">
+        <h2 class="section-title">A Dedicated Playlist 🎵</h2>
+        <p class="section-subtitle">I Hope You'll Like It</p>
+
+        <div class="music-player">
+            <div class="song-item" onclick="playSong(1)">
+                <div class="song-info">
+                    <h3>Dil Cheeze Tujhe Dedi</h3>
+                    <p>You own this heart - dedicated to you</p>
+                </div>
+                <div class="play-btn">▶️</div>
+            </div>
+
+            <div class="song-item" onclick="playSong(2)">
+                <div class="song-info">
+                    <h3>If the world was ending</h3>
+                    <p>Even if the world ends, I'd still find you</p>
+                </div>
+                <div class="play-btn">▶️</div>
+            </div>
+
+            <div class="song-item" onclick="playSong(3)">
+                <div class="song-info">
+                    <h3>Dil Ka... Tu Kaare Dil Bekarar</h3>
+                    <p>You make my heart restless</p>
+                </div>
+                <div class="play-btn">▶️</div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn-nav" onclick="nextPage('cardsPage')">Discover Mystery Cards 🎴</button>
+        </div>
+    </div>
+
+    <!-- Mystery Cards Page -->
+    <div class="page" id="cardsPage">
+        <h2 class="section-title">Some Special Cards 🎴</h2>
+        <p class="section-subtitle">Click each card to reveal a special message!</p>
+
+        <div class="cards-container">
+            <div class="mystery-card" onclick="revealCard(this, 0)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <span class="icon">💝</span>
+                        <h3>Tap Me!</h3>
+                    </div>
+                    <div class="card-back">
+                        <h3>I Love U Always 💖</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mystery-card" onclick="revealCard(this, 1)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <span class="icon">🌟</span>
+                        <h3>Tap Me!</h3>
+                    </div>
+                    <div class="card-back">
+                        <h3>You are my world 🌍</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mystery-card" onclick="revealCard(this, 2)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <span class="icon">✨</span>
+                        <h3>Tap Me!</h3>
+                    </div>
+                    <div class="card-back">
+                        <h3>You & Me Forever ♾️</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-indicator">
+            <h4 id="progressText">0 of 3 messages discovered!</h4>
+            <p style="color: white; margin-top: 10px;">Keep exploring ✨</p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn-nav" onclick="nextPage('finalPage')" id="finalBtn" style="display: none;">Read Final Message 💌</button>
+        </div>
+    </div>
+
+    <!-- Final Message Page -->
+    <div class="page" id="finalPage">
+        <div class="final-card">
+            <h3>My Sweetest Cutiepie 🥰</h3>
+            <p>You're the calm I reach for and the laugh that brightens my day.</p>
+            <p>I hope this tiny world made you smile - and remember how much you mean to me.</p>
+            <p>I'll keep making memories, big and small, always with you.</p>
+            <p>Forever yours, in every little universe.</p>
+            <p class="final-signature">Sealing your letter...</p>
+            <p class="final-signature">With all my love 💕</p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn-nav" onclick="nextPage('sealPage')">Seal the Letter 💌</button>
+        </div>
+    </div>
+
+    <!-- Sealed Ending Page -->
+    <div class="page" id="sealPage">
+        <div class="seal-container">
+            <div class="seal-animation">
+                <div class="wax-seal">💖</div>
+            </div>
+            <div class="glass-card seal-text">
+                <p style="color: white; font-size: 1.3rem; margin-bottom: 10px;">Letter Sealed with Love</p>
+                <p style="color: white; font-size: 1.5rem; font-weight: 600;">I Love You Always</p>
+                <p style="color: white; font-size: 1.2rem;">Always Yours ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Floating hearts background
+        function createFloatingHearts() {
+            const heartsBg = document.getElementById('heartsBg');
+            const hearts = ['💖', '💕', '💗', '💓', '💝', '🌸', '🌺', '🦋'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartsBg.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 8000);
+            }, 800);
+        }
+
+        // Page navigation
+        function nextPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+                setTimeout(() => page.classList.add('hidden'), 800);
+            });
+
+            setTimeout(() => {
+                const nextPage = document.getElementById(pageId);
+                nextPage.classList.remove('hidden');
+                setTimeout(() => nextPage.classList.add('active'), 50);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 800);
+        }
+
+        // Open letter
+        let letterOpened = false;
+        function openLetter() {
+            const envelope = document.getElementById('envelope');
+            const overlay = document.getElementById('letterOverlay');
+            const navButtons = document.getElementById('letterNavButtons');
+            
+            if (!letterOpened) {
+                envelope.classList.add('open');
+                overlay.classList.add('active');
+                letterOpened = true;
+                createHeartConfetti();
+                
+                // Show the Continue button after letter animation completes
+                setTimeout(() => {
+                    navButtons.style.opacity = '1';
+                    navButtons.style.pointerEvents = 'all';
+                    navButtons.classList.add('show');
+                }, 1500); // Wait for letter animation to complete
+            }
+        }
+
+        // Close letter
+        function closeLetter() {
+            const envelope = document.getElementById('envelope');
+            const overlay = document.getElementById('letterOverlay');
+            if (letterOpened) {
+                envelope.classList.remove('open');
+                overlay.classList.remove('active');
+                letterOpened = false;
+            }
+        }
+
+        // Play song (placeholder)
+        function playSong(songNum) {
+            const songs = [
+                'Dil Cheeze Tujhe Dedi',
+                'If the world was ending',
+                'Dil Ka... Tu Kaare Dil Bekarar'
+            ];
+            alert(`🎵 Now playing: ${songs[songNum - 1]}\n\nIn a full version, this would play the actual song!`);
+        }
+
+        // Reveal cards
+        let revealedCards = new Set();
+        function revealCard(card, index) {
+            if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+                revealedCards.add(index);
+                updateProgress();
+                createHeartConfetti();
+            }
+        }
+
+        // Update progress
+        function updateProgress() {
+            const count = revealedCards.size;
+            const progressText = document.getElementById('progressText');
+            const finalBtn = document.getElementById('finalBtn');
+            
+            progressText.textContent = `${count} of 3 messages discovered!`;
+            
+            if (count === 3) {
+                setTimeout(() => {
+                    progressText.textContent = 'All messages discovered! 🎉';
+                    finalBtn.style.display = 'inline-block';
+                    createConfetti();
+                }, 500);
+            }
+        }
+
+        // Heart confetti
+        function createHeartConfetti() {
+            const confetti = document.getElementById('confetti');
+            const hearts = ['💖', '💕', '💗', '💓'];
+            
+            for (let i = 0; i < 30; i++) {
+                const piece = document.createElement('div');
+                piece.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                piece.style.position = 'absolute';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                piece.style.animationDelay = Math.random() * 0.5 + 's';
+                piece.style.animation = 'confettiFall 3s ease-out forwards';
+                confetti.appendChild(piece);
+
+                setTimeout(() => piece.remove(), 3000);
+            }
+        }
+
+        // Full confetti explosion
+        function createConfetti() {
+            const confetti = document.getElementById('confetti');
+            const hearts = ['💖', '💕', '💗', '💓', '💝', '🌸', '🎉', '✨'];
+            
+            for (let i = 0; i < 100; i++) {
+                const piece = document.createElement('div');
+                piece.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                piece.style.position = 'absolute';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                piece.style.animationDelay = Math.random() * 1 + 's';
+                piece.style.animation = 'confettiFall 4s ease-out forwards';
+                confetti.appendChild(piece);
+
+                setTimeout(() => piece.remove(), 4000);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createFloatingHearts();
+        });
+
+        // Smooth scrolling
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
